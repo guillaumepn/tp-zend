@@ -5,7 +5,7 @@ namespace Meetup\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-class AddForm extends Form
+class MeetupForm extends Form
 {
     public function __construct()
     {

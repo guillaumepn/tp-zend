@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Meetup\Controller;
 
-use Meetup\Form\AddForm;
-use Meetup\InputFilter\AddMeetup;
-use Zend\I18n\View\Helper\Translate;
+use Meetup\Form\MeetupForm;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\ViewModel;
 use Meetup\Entity\Meetup;
 
@@ -41,7 +38,7 @@ class MeetupController extends AbstractActionController
 
     public function addAction()
     {
-        $form = new AddForm();
+        $form = new MeetupForm();
 
         $request = $this->getRequest();
 
@@ -52,7 +49,7 @@ class MeetupController extends AbstractActionController
             if ($form->isValid()) {
                 $data = $form->getData();
                 $this->meetupManager->addMeetup($data);
-                return $this->redirect()->toRoute('meetup', ['action' => 'index']);
+                return $this->redirect()->toRoute('meetup');
             }
         }
         return new ViewModel([
@@ -60,12 +57,53 @@ class MeetupController extends AbstractActionController
         ]);
     }
 
-    public function deleteAction($id)
+    public function deleteAction($id = 'default')
     {
-//        $meetup = new Meetup();
-//
-//        return new ViewModel([
-//            'meetup' => $meetup
-//        ]);
+        $meetup = $this->entityManager->
+            getRepository(Meetup::class)->
+            findOneById($id);
+
+        return new ViewModel([
+            'meetup' => $meetup
+        ]);
+    }
+
+    public function editAction()
+    {
+        $form = new MeetupForm();
+        $meetupId = $this->params()->fromRoute('id', -1);
+        $meetup = $this->entityManager->
+            getRepository(Meetup::class)->
+            findOneById($meetupId);
+
+        if ($meetup === null) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $data = $this->params()->fromPost();
+            $form->setData($data);
+
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $this->meetupManager->updateMeetup($meetup, $data);
+                return $this->redirect()->toRoute('meetup');
+            }
+        } else {
+            $data = [
+                'title' => $meetup->getTitle(),
+                'description' => $meetup->getDescription(),
+                'date_start' => $meetup->getDateStart(),
+                'date_end' => $meetup->getDateEnd()
+            ];
+
+            $form->setData($data);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'meetup' => $meetup
+        ]);
     }
 }

@@ -15,9 +15,6 @@ class MeetupManager
 
     public function addMeetup($data)
     {
-        echo '<pre><code>';
-        print_r($data);
-        echo '</code></pre>';
         $meetup = new Meetup();
         $meetup->setTitle($data['title']);
         $meetup->setDescription($data['description']);
@@ -25,6 +22,16 @@ class MeetupManager
         $meetup->setDateEnd($data['date_end']);
 
         $this->entityManager->persist($meetup);
+        $this->entityManager->flush();
+    }
+
+    public function updateMeetup($meetup, $data)
+    {
+        $meetup->setTitle($data['title']);
+        $meetup->setDescription($data['description']);
+        $meetup->setDateStart($data['date_start']);
+        $meetup->setDateEnd($data['date_end']);
+
         $this->entityManager->flush();
     }
 }

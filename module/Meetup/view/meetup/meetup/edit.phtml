@@ -1,0 +1,45 @@
+<h1>Editer un Meetup</h1>
+
+<?php
+
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$form->get('submit')->setValue('Editer l\'événement');
+$form->prepare();
+?>
+
+<div class="row">
+    <div class="col-md-6">
+        <?php
+        echo $this->form()->openTag($form);
+        ?>
+        <div class="form-group">
+            <?= $this->formLabel($form->get('title')) ?>
+            <?= $this->formElement($form->get('title')) ?>
+            <?= $this->formElementErrors($form->get('title')) ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('description')) ?>
+            <?= $this->formElement($form->get('description')) ?>
+            <?= $this->formElementErrors($form->get('description')) ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('date_start')) ?>
+            <?= $this->formElement($form->get('date_start')) ?>
+            <?= $this->formElementErrors($form->get('date_start')) ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('date_end')) ?>
+            <?= $this->formElement($form->get('date_end')) ?>
+            <?= $this->formElementErrors($form->get('date_end')) ?>
+        </div>
+        <?php
+        echo $this->formSubmit($form->get('submit'));
+        echo $this->form()->closeTag();
+        ?>
+    </div>
+</div>
+

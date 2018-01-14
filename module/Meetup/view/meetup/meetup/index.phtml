@@ -12,11 +12,14 @@
     <span class="description"><?= $meetup->description ?></span>
     <span class="dateStart"><?= $meetup->date_start ?></span>
     <span class="dateEnd"><?= $meetup->date_end ?></span>
-    <span class="edit"><a href="<?= $this->url('meetup', ['action' => 'edit']) ?>">E</a></span>
-    <span class="delete"><a href="<?= $this->url('meetup', ['action' => 'delete']) ?>">X</a></span>
+<!--    <span class="edit"><a href="--><?//= $this->url('meetup', ['action' => 'edit']) ?><!--">E</a></span>-->
+<!--    <span class="delete"><a href="--><?//= $this->url('meetup', ['action' => 'delete']) ?><!--">X</a></span>-->
+    <span class="edit"><a href="/meetup/edit/<?= $meetup->id ?>">E</a></span>
+    <span class="delete"><a href="/meetup/delete/<?= $meetup->id ?>">X</a></span>
 </li>
 <? endforeach;
 echo '</ul>';
+var_dump($this->url('meetup', ['action' => 'edit', 'id' => 'test']));
 }
 ?>
 </p>
