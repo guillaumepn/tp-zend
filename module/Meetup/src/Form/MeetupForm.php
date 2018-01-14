@@ -171,7 +171,7 @@ class MeetupForm extends Form
                 [
                     'name' => 'NotEmpty',
                     'options' => [
-                        'message' => 'La date de début est obligatoire.',
+                        'message' => 'La date de fin est obligatoire.',
                     ],
                 ],
                 [
