@@ -110,6 +110,4 @@ class Meetup
     {
         $this->date_end = $date_end;
     }
-
-
 }

@@ -1,25 +1,26 @@
 <h1>Meetups à venir</h1>
 
-<p>
-    <?php
-    if (count($meetups) === 0) {
-        echo 'Aucun meetup à venir.';
-    } else {
-    echo '<ul class="meetup">';
+<?php
+if (count($meetups) === 0) {
+    echo 'Aucun meetup à venir.';
+} else {
+    echo '<ul class="meetups">';
     foreach ($meetups as $meetup): ?>
-<li>
-    <span class="title"><?= $meetup->title ?></span>
-    <span class="description"><?= $meetup->description ?></span>
-    <span class="dateStart"><?= $meetup->date_start ?></span>
-    <span class="dateEnd"><?= $meetup->date_end ?></span>
-<!--    <span class="edit"><a href="--><?//= $this->url('meetup', ['action' => 'edit']) ?><!--">E</a></span>-->
-<!--    <span class="delete"><a href="--><?//= $this->url('meetup', ['action' => 'delete']) ?><!--">X</a></span>-->
-    <span class="edit"><a href="/meetup/edit/<?= $meetup->id ?>">E</a></span>
-    <span class="delete"><a href="/meetup/delete/<?= $meetup->id ?>">X</a></span>
-</li>
-<? endforeach;
-echo '</ul>';
-var_dump($this->url('meetup', ['action' => 'edit', 'id' => 'test']));
+        <li class="panel panel-default">
+            <div class="title panel-heading">
+                <h3 class="panel-title pull-left"><?= $meetup->title ?></h3>
+                <div class="actions text-right">
+                    <span class="edit"><a href="/meetup/edit/<?= $meetup->id ?>" class="glyphicon glyphicon-pencil"></a></span>
+                    <span class="delete"><a href="/meetup/delete/<?= $meetup->id ?>">X</a></span>
+                </div>
+            </div>
+            <div class="description panel-body"><?= $meetup->description ?></div>
+            <div class="dates panel-footer text-right">
+                Du <span class="dateStart"><?= $meetup->date_start ?></span>
+                au <span class="dateEnd"><?= $meetup->date_end ?></span>
+            </div>
+        </li>
+    <? endforeach;
+    echo '</ul>';
 }
 ?>
-</p>

@@ -9,10 +9,8 @@ class MeetupForm extends Form
 {
     public function __construct()
     {
-        // Define form name
         parent::__construct('add-form');
 
-        // Set POST method for this form
         $this->setAttribute('method', 'post');
 
         $this->addElements();
@@ -77,7 +75,6 @@ class MeetupForm extends Form
                 'value' => 'Créer l\'événement',
             ],
         ]);
-
     }
 
     public function addInputFilter()
@@ -155,7 +152,7 @@ class MeetupForm extends Form
                 [
                     'name' => 'Callback',
                     'options' => [
-                        'callback' => function($value, $context = []) {
+                        'callback' => function ($value, $context = []) {
                             if ($value > $context['date_end']) {
                                 return false;
                             }

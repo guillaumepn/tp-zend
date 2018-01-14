@@ -57,17 +57,6 @@ class MeetupController extends AbstractActionController
         ]);
     }
 
-    public function deleteAction($id = 'default')
-    {
-        $meetup = $this->entityManager->
-            getRepository(Meetup::class)->
-            findOneById($id);
-
-        return new ViewModel([
-            'meetup' => $meetup
-        ]);
-    }
-
     public function editAction()
     {
         $form = new MeetupForm();
@@ -105,5 +94,21 @@ class MeetupController extends AbstractActionController
             'form' => $form,
             'meetup' => $meetup
         ]);
+    }
+
+    public function deleteAction()
+    {
+        $meetupId = $this->params()->fromRoute('id', -1);
+        $meetup = $this->entityManager->
+            getRepository(Meetup::class)->
+            findOneById($meetupId);
+
+        if ($meetup === null) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $this->meetupManager->deleteMeetup($meetup);
+        return $this->redirect()->toRoute('meetup');
     }
 }

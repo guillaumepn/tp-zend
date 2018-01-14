@@ -93,7 +93,6 @@ return [
         'template_map' => [
             'meetup/index' => __DIR__ . '/../view/meetup/meetup/index.phtml',
             'meetup/add' => __DIR__ . '/../view/meetup/meetup/add.phtml',
-            'meetup/delete' => __DIR__ . '/../view/meetup/meetup/delete.phtml',
             'meetup/edit' => __DIR__ . '/../view/meetup/meetup/edit.phtml',
         ],
         'template_path_stack' => [

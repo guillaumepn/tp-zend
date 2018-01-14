@@ -34,4 +34,10 @@ class MeetupManager
 
         $this->entityManager->flush();
     }
+
+    public function deleteMeetup($meetup)
+    {
+        $this->entityManager->remove($meetup);
+        $this->entityManager->flush();
+    }
 }

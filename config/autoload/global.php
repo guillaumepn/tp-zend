@@ -12,8 +12,4 @@
  */
 
 return [
-    'db' => [
-        'driver' => 'Pdo',
-        'dsn' => sprintf('sqlite:%s/data/tpzend.db', realpath(getcwd())),
-    ],
 ];
