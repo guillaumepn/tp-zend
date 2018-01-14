@@ -1,7 +1,26 @@
-zf:
-  build: .
-  dockerfile: Dockerfile
-  ports:
-   - "8080:80"
-  volumes:
-   - .:/var/www
+version: "3.3"
+
+services:
+  zf:
+    build: .
+    ports:
+     - "8080:80"
+    volumes:
+     - .:/var/www
+    depends_on:
+      - database
+    environment:
+      - MEETUP_DB_HOST=localhost
+      - MEETUP_DB_NAME=demo
+      - MEETUP_DB_USER=demo
+      - MEETUP_DB_PASS=demo
+      - MEETUP_DB_PORT=3306
+  database:
+    image: mysql:5.7
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=demo
+      - MYSQL_DATABASE=demo
+      - MYSQL_USER=demo
+      - MYSQL_PASSWORD=demo

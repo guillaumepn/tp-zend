@@ -1,0 +1,22 @@
+<h1>Meetups à venir</h1>
+
+<p>
+    <?php
+    if (count($meetups) === 0) {
+        echo 'Aucun meetup à venir.';
+    } else {
+    echo '<ul class="meetup">';
+    foreach ($meetups as $meetup): ?>
+<li>
+    <span class="title"><?= $meetup->title ?></span>
+    <span class="description"><?= $meetup->description ?></span>
+    <span class="dateStart"><?= $meetup->date_start ?></span>
+    <span class="dateEnd"><?= $meetup->date_end ?></span>
+    <span class="edit"><a href="<?= $this->url('meetup', ['action' => 'edit']) ?>">E</a></span>
+    <span class="delete"><a href="<?= $this->url('meetup', ['action' => 'delete']) ?>">X</a></span>
+</li>
+<? endforeach;
+echo '</ul>';
+}
+?>
+</p>
