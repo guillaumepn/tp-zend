@@ -9,7 +9,7 @@ TP Zend ESGI 4IW1
 * Créer une table `meetup` :  
 ```sql
 CREATE TABLE `meetup` (
-`id` text PRIMARY KEY,
+`id` varchar(36) PRIMARY KEY,
 `title` text NOT NULL,
 `description` text NOT NULL,
 `date_start` date NOT NULL,
