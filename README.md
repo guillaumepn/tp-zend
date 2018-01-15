@@ -1,6 +1,12 @@
 # tp-zend
 TP Zend ESGI 4IW1
 
+## Préparations 
+
+* Copier et renommer `config/autoload/local.php.dist` en `config/autoload/local.php`  
+* Copier et renommer `config/development.config.php.dist` en `config/development.config.php`  
+
+
 ## Base de données
 
 * Se connecter au bash du container `database`  
